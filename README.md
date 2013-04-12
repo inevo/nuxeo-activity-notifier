@@ -1,0 +1,4 @@
+nuxeo-activity-notifier
+=======================
+
+Notifier
