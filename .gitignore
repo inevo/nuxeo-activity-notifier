@@ -1,0 +1,17 @@
+/bin/META-INF/MANIFEST.MF
+/bin/org/nuxeo/ecm/activity/notifier/ActivityNotificationImpl.class
+/bin/org/nuxeo/ecm/activity/notifier/api/ActivityNotification.class
+/bin/org/nuxeo/ecm/activity/notifier/api/ActivityNotificationRegistry.class
+/bin/org/nuxeo/ecm/activity/notifier/api/ActivityNotifierManager.class
+/bin/org/nuxeo/ecm/activity/notifier/NotifierEventListener.class
+/bin/org/nuxeo/ecm/activity/notifier/service/ActivityNotificationDescriptor.class
+/bin/org/nuxeo/ecm/activity/notifier/service/ActivityNotificationRegistryImpl.class
+/bin/org/nuxeo/ecm/activity/notifier/service/ActivityNotifierService.class
+/bin/org/nuxeo/ecm/activity/notifier/service/NotifierServiceHelper.class
+/bin/org/nuxeo/ecm/activity/notifier/service/SettingsDescriptor.class
+/bin/OSGI-INF/activitynotifier-service.xml
+/bin/OSGI-INF/notification-listener-contribution.xml
+/.checkstyle
+/.classpath
+/.project
+/.pmd
