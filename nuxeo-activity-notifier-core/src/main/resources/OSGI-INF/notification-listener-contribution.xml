@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.ecm.activity.notifier.listener" version="1.0.0">
+
+  <extension target="org.nuxeo.ecm.core.event.EventServiceComponent" point="listener">
+
+    <listener name="notificationListener" async="true" postCommit="true"
+      class="org.nuxeo.ecm.activity.notifier.listener.NotifierEventListener" priority="120">
+      <events>activityAdded</events>
+      <events>activityRemoved</events>
+      <events>activityReplyAdded</events>
+      <events>activityReplyRemoved</events>
+    </listener>
+
+  </extension>
+
+</component>

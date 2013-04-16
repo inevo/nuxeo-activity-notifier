@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.ecm.activity.notifier.service.ActivityNotifierService">
+
+  <documentation>
+    @author Tiago Cardoso (tiago.cardoso@inEvo.pt)
+  </documentation>
+
+  <implementation
+    class="org.nuxeo.ecm.activity.notifier.service.ActivityNotifierService" />
+
+  <service>
+    <provide
+      interface="org.nuxeo.ecm.activity.notifier.service.ActivityNotifierManager" />
+  </service>
+
+</component>

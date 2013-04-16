@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.nuxeo.ecm.platform</groupId>
+    <artifactId>nuxeo-activity-notifier-parent</artifactId>
+    <version>5.7-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>nuxeo-activity-notifier-core</artifactId>
+  <name>Nuxeo Activity Notifier - Core</name>
+  <description>Nuxeo Enterprise Platform: Activity user notifier.
+    This service handle activity user notification when events occur in the platform.
+    Notifications are configurable (through extension points) and can be defined to notify specific activities.
+    Relationship service is used to check if a user is following a document/actor and should receive a notification</description>
+  <dependencies>
+
+  </dependencies>
+
+</project>

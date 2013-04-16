@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Require-Bundle: org.nuxeo.ecm.directory.api, org.nuxeo.ecm.default.con
+ fig,org.nuxeo.ecm.notifier
+Bundle-Vendor: Nuxeo
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Bundle-Version: 5.7
+Bundle-Name: nuxeo-activity-notifier-core
+Nuxeo-Component: OSGI-INF/notification-listener-contrib.xml,OSGI-INF/activitynotifier-service.xml
+Bundle-SymbolicName: nuxeo-activity-notifier-core
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+
