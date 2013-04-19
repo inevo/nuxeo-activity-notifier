@@ -11,7 +11,7 @@ import org.nuxeo.ecm.social.relationship.RelationshipKind;
 import org.nuxeo.ecm.social.relationship.service.RelationshipKindDescriptor;
 import org.nuxeo.ecm.social.relationship.service.RelationshipKindRegistry;
 
-@XObject("userNotification")
+@XObject("activityNotification")
 public class ActivityNotificationDescriptor implements ActivityNotification {
 
     private static final long serialVersionUID = -5974825427889204458L;
@@ -31,7 +31,7 @@ public class ActivityNotificationDescriptor implements ActivityNotification {
     @XNode("@enabled")
     protected boolean enabled = true;
     
-    @XNodeList(value = "relationsipKinds", type = ArrayList.class, componentType = RelationshipKindDescriptor.class)
+    @XNodeList(value = "kind", type = ArrayList.class, componentType = RelationshipKindDescriptor.class)
     protected List<RelationshipKindDescriptor> relationshipKinds;
 
     @Override

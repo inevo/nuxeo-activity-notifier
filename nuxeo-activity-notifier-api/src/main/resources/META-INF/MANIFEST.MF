@@ -3,7 +3,7 @@ Require-Bundle: org.nuxeo.ecm.directory.api, org.nuxeo.ecm.default.con
  fig, org.nuxeo.ecm.notifier
 Bundle-Vendor: Nuxeo
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .
+Bundle-ClassPath: org.nuxeo.activity.notifier.api
 Bundle-Version: 5.7
 Bundle-Name: nuxeo-activity-notifier-api
 Nuxeo-Component: 

@@ -10,7 +10,48 @@
 
   <service>
     <provide
-      interface="org.nuxeo.ecm.activity.notifier.service.ActivityNotifierManager" />
+      interface="org.nuxeo.ecm.activity.notifier.api.ActivityNotifierManager" />
   </service>
+  
+  <extension-point name="notifications">
+    <documentation>
+      This extension point can be used to configure available notifications. A
+      given notification has the form:
+      <code>
+		<userNotification name="comments" 
+						  label="" 
+						  verb="commentCreated" 
+						  targetId="" 
+						  enabled="true">
+			<kind group="document" name="followers"/>
+		</userNotification>
+      </code>
+      The
+      <em>name</em>
+      is the identifier for this notification.
+
+      The
+      <em>label</em>
+      label of notification description
+
+      The
+      <em>verb</em>
+      activity verb to watch and act
+
+      The
+      <em>targetId</em>
+      not at work by now
+
+      To disable an existing notification:
+      <code>
+        <notification name="comments" enabled="false" />
+      </code>
+    </documentation>
+    <object
+      class="org.nuxeo.ecm.activity.notifier.service.ActivityNotificationDescriptor" />
+    <object
+      class="org.nuxeo.ecm.social.relationship.service.RelationshipKindDescriptor" />
+  </extension-point>
+
 
 </component>

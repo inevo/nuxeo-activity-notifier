@@ -1,18 +1,12 @@
 package org.nuxeo.ecm.activity.notifier.service;
 
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.nuxeo.ecm.activity.notifier.api.ActivityNotification;
-import org.nuxeo.ecm.activity.notifier.api.ActivityNotifierManager;
 import org.nuxeo.ecm.activity.notifier.api.ActivityNotificationRegistry;
-import org.nuxeo.ecm.core.api.ClientException;
-import org.nuxeo.ecm.platform.ec.notification.service.GeneralSettingsDescriptor;
-import org.nuxeo.ecm.social.relationship.RelationshipConstants;
-import org.nuxeo.ecm.social.relationship.RelationshipKind;
-import org.nuxeo.runtime.api.Framework;
+import org.nuxeo.ecm.activity.notifier.api.ActivityNotifierManager;
 import org.nuxeo.runtime.model.ComponentContext;
 import org.nuxeo.runtime.model.ComponentName;
 import org.nuxeo.runtime.model.DefaultComponent;

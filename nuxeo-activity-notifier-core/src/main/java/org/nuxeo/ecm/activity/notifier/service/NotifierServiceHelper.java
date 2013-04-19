@@ -1,6 +1,7 @@
 package org.nuxeo.ecm.activity.notifier.service;
 
-import org.nexuo.ecm.notifier.service.NotifierService;
+import org.nuxeo.ecm.notifier.service.NotifierService;
+import org.nuxeo.ecm.activity.notifier.api.ActivityNotifierManager;
 import org.nuxeo.ecm.core.api.ClientException;
 import org.nuxeo.ecm.platform.usermanager.UserManager;
 import org.nuxeo.ecm.social.relationship.service.RelationshipService;
@@ -21,13 +22,24 @@ public class NotifierServiceHelper {
     private static UserManager userManager;
     private static RelationshipService relationshipService;
     private static NotifierService notifierService;
+    private static ActivityNotifierManager activityNotifierService;
 
     /**
      * Locates the notification service using NXRuntime.
-     */
+     *
     public static ActivityNotifierService getActivityNotifierService() {
-        return (ActivityNotifierService) Framework.getRuntime().getComponent(
-        		ActivityNotifierService.NAME);
+        return (ActivityNotifierService)  Framework.getLocalService(ActivityNotifierManager.class);
+    }
+    */
+    public static ActivityNotifierManager getActivityNotifierService() throws ClientException {
+        if (activityNotifierService == null) {
+            try {
+            	activityNotifierService = Framework.getLocalService(ActivityNotifierManager.class);
+            } catch (Exception e) {
+                throw new ClientException(e);
+            }
+        }
+        return activityNotifierService;
     }
 
 
