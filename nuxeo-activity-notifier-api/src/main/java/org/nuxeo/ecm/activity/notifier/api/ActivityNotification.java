@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.nuxeo.ecm.social.relationship.RelationshipKind;
-import org.nuxeo.ecm.social.relationship.service.RelationshipKindDescriptor;
 
 public interface ActivityNotification extends Serializable {
 
@@ -28,6 +27,5 @@ public interface ActivityNotification extends Serializable {
 	boolean getEnabled();
 
 	List<RelationshipKind> getRelationshipKinds();
-
 
 }

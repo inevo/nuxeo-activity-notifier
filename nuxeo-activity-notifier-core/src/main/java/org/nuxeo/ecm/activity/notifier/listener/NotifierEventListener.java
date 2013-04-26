@@ -30,17 +30,16 @@ public class NotifierEventListener implements EventListener {
 	private static final Log log = LogFactory
 			.getLog(NotifierEventListener.class);
 
-
 	@Override
 	public void handleEvent(Event event) throws ClientException {
-		
+
 		if (NotifierServiceHelper.getActivityNotifierService() == null) {
 			log.error("Unable to get NotificationService, exiting");
 			return;
 		}
 
-
-			List<ActivityNotification> notifs = NotifierServiceHelper.getActivityNotifierService().getNotifications();
+		List<ActivityNotification> notifs = NotifierServiceHelper
+				.getActivityNotifierService().getNotifications();
 		if (notifs != null && !notifs.isEmpty()) {
 			try {
 				handleNotifications(event, notifs);
@@ -49,7 +48,6 @@ public class NotifierEventListener implements EventListener {
 						+ event.getName(), e);
 			}
 		}
-
 
 	}
 
@@ -67,13 +65,21 @@ public class NotifierEventListener implements EventListener {
 
 		Map<ActivityNotification, List<String>> targetUsers = getInterstedUsers(
 				activityCtx.getActivity(), notifs);
-		//String user, String originEvent, String name, String target, String object, String label
+		// String user, String originEvent, String name, String target, String
+		// object, String label
 		for (ActivityNotification notif : targetUsers.keySet()) {
 			List<String> users = targetUsers.get(notif);
 			for (String user : users) {
-				NotifierServiceHelper.getNotifierService().addNotification(
-						user, event.getName(), notif.getName(),
-						"activity:" + activityCtx.getActivity().getId().toString(), activityCtx.getActivity().getTarget(), notif.getLabel());
+				NotifierServiceHelper.getNotifierService()
+						.addNotification(
+								user,
+								event.getName(),
+								notif.getName(),
+								"activity:"
+										+ activityCtx.getActivity().getId()
+												.toString(),
+								activityCtx.getActivity().getTarget(),
+								notif.getLabel());
 			}
 
 		}
@@ -98,7 +104,6 @@ public class NotifierEventListener implements EventListener {
 		}
 		return interested;
 	}
-
 
 	/*
 	 * private boolean isDeleteEvent(String eventId) { List<String>

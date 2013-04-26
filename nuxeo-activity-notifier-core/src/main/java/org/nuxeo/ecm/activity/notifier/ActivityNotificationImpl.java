@@ -5,9 +5,6 @@ import java.util.List;
 import org.nuxeo.ecm.activity.notifier.api.ActivityNotification;
 import org.nuxeo.ecm.platform.ec.notification.NotificationImpl;
 import org.nuxeo.ecm.social.relationship.RelationshipKind;
-import org.nuxeo.ecm.social.relationship.service.RelationshipKindDescriptor;
-
-import com.sun.org.apache.xpath.internal.operations.Equals;
 
 public class ActivityNotificationImpl implements ActivityNotification {
 
@@ -22,9 +19,9 @@ public class ActivityNotificationImpl implements ActivityNotification {
 	private String targetId;
 
 	private boolean enabled;
-	
+
 	private List<RelationshipKind> relationshipKinds;
-	
+
 	public ActivityNotificationImpl(String name, String label, String verb,
 			String targetId, List<RelationshipKind> relationshipKinds) {
 		this.name = name;
@@ -89,7 +86,5 @@ public class ActivityNotificationImpl implements ActivityNotification {
 		// TODO Auto-generated method stub
 		return relationshipKinds;
 	}
-
-
 
 }
