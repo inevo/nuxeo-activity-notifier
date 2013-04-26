@@ -16,6 +16,49 @@
     <module>nuxeo-activity-notifier-api</module>
     <module>nuxeo-activity-notifier-core</module>
   </modules>
- 
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.nuxeo.activity</groupId>
+	<artifactId>nuxeo-activity</artifactId>
+	<!-- TODO - Remove this custom version once we have activity events -->
+	<version>5.7-dev-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.activity.notifier</groupId>
+        <artifactId>nuxeo-activity-notifier-api</artifactId>
+        <version>5.7-SNAPSHOT</version>
+      </dependency> 
+      <dependency>
+        <groupId>org.nuxeo.notifier</groupId>
+        <artifactId>nuxeo-notifier</artifactId>
+        <version>5.7-SNAPSHOT</version>
+       </dependency>
+    </dependencies>
+  </dependencyManagement> 
+
+   <repositories>
+     <repository>
+       <id>public</id>
+       <url>http://maven.nuxeo.org/nexus/content/groups/public</url>
+       <releases>
+         <enabled>true</enabled>
+       </releases>
+       <snapshots>
+         <enabled>false</enabled>
+       </snapshots>
+     </repository>
+     <repository>
+       <id>public-snapshot</id>
+       <url>http://maven.nuxeo.org/nexus/content/groups/public-snapshot</url>
+       <releases>
+         <enabled>false</enabled>
+       </releases>
+       <snapshots>
+         <updatePolicy>always</updatePolicy>
+         <enabled>true</enabled>
+       </snapshots>
+    </repository>
+  </repositories>
 </project>
