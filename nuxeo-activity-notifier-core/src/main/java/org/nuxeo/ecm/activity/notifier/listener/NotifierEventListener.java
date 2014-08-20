@@ -27,8 +27,7 @@ import org.nuxeo.ecm.social.relationship.RelationshipKind;
  */
 public class NotifierEventListener implements EventListener {
 
-	private static final Log log = LogFactory
-			.getLog(NotifierEventListener.class);
+	private static final Log log = LogFactory.getLog(NotifierEventListener.class);
 
 	@Override
 	public void handleEvent(Event event) throws ClientException {
@@ -38,21 +37,18 @@ public class NotifierEventListener implements EventListener {
 			return;
 		}
 
-		List<ActivityNotification> notifs = NotifierServiceHelper
-				.getActivityNotifierService().getNotifications();
+		List<ActivityNotification> notifs = NotifierServiceHelper.getActivityNotifierService().getNotifications();
 		if (notifs != null && !notifs.isEmpty()) {
 			try {
 				handleNotifications(event, notifs);
 			} catch (Exception e) {
-				log.error("Error during Notification processing for event "
-						+ event.getName(), e);
+				log.error("Error during Notification processing for event "	+ event.getName(), e);
 			}
 		}
 
 	}
 
-	protected void handleNotifications(Event event,
-			List<ActivityNotification> notifs) throws Exception {
+	protected void handleNotifications(Event event, List<ActivityNotification> notifs) throws Exception {
 
 		EventContext ctx = event.getContext();
 		ActivityEventContext activityCtx = null;
@@ -63,25 +59,21 @@ public class NotifierEventListener implements EventListener {
 			return;
 		}
 
-		Map<ActivityNotification, List<String>> targetUsers = getInterstedUsers(
-				activityCtx.getActivity(), notifs);
+		Map<ActivityNotification, List<String>> targetUsers = getInterstedUsers(activityCtx.getActivity(), notifs);
 		// String user, String originEvent, String name, String target, String
 		// object, String label
 		for (ActivityNotification notif : targetUsers.keySet()) {
 			List<String> users = targetUsers.get(notif);
 			for (String user : users) {
-				NotifierServiceHelper.getNotifierService()
-						.addNotification(
-								user,
-								event.getName(),
-								notif.getName(),
-								"activity:"
-										+ activityCtx.getActivity().getId()
-												.toString(),
-								activityCtx.getActivity().getTarget(),
-								notif.getLabel());
+				NotifierServiceHelper.getNotifierService().addNotification(
+                    user,
+                    event.getName(),
+                    notif.getName(),
+                    "activity:"	+ activityCtx.getActivity().getId().toString(),
+                    activityCtx.getActivity().getTarget(),
+                    notif.getLabel()
+                );
 			}
-
 		}
 
 	}
