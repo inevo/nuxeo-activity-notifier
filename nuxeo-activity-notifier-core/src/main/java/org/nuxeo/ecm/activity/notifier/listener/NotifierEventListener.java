@@ -11,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.nuxeo.ecm.activity.Activity;
 import org.nuxeo.ecm.activity.ActivityEventContext;
+import org.nuxeo.ecm.activity.ActivityHelper;
 import org.nuxeo.ecm.activity.notifier.api.ActivityNotification;
 import org.nuxeo.ecm.activity.notifier.service.NotifierServiceHelper;
 import org.nuxeo.ecm.core.api.ClientException;
@@ -59,22 +60,31 @@ public class NotifierEventListener implements EventListener {
 			return;
 		}
 
-		Map<ActivityNotification, List<String>> targetUsers = getInterstedUsers(activityCtx.getActivity(), notifs);
-		// String user, String originEvent, String name, String target, String
-		// object, String label
-		for (ActivityNotification notif : targetUsers.keySet()) {
-			List<String> users = targetUsers.get(notif);
-			for (String user : users) {
-				NotifierServiceHelper.getNotifierService().addNotification(
-                    user,
-                    event.getName(),
-                    notif.getName(),
-                    "activity:"	+ activityCtx.getActivity().getId().toString(),
-                    activityCtx.getActivity().getTarget(),
-                    notif.getLabel()
-                );
-			}
-		}
+        List<ActivityNotification> verbNotifs = new ArrayList<>();
+        for (ActivityNotification notif : notifs){
+            if (notif.getVerb().equals(activityCtx.getActivity().getVerb())){
+                verbNotifs.add(notif);
+            }
+        }
+
+        if (!notifs.isEmpty()) {
+            Map<ActivityNotification, List<String>> targetUsers = getInterstedUsers(activityCtx.getActivity(), verbNotifs);
+            // String user, String originEvent, String name, String target, String object, String label
+            for (ActivityNotification notif : targetUsers.keySet()) {
+                List<String> users = targetUsers.get(notif);
+                for (String user : users) {
+                    String userSimple = ActivityHelper.getUsername(user);
+                    NotifierServiceHelper.getNotifierService().addNotification(
+                            userSimple,
+                            event.getName(),
+                            notif.getName(),
+                            "activity:" + activityCtx.getActivity().getId().toString(),
+                            activityCtx.getActivity().getTarget(),
+                            notif.getLabel()
+                    );
+                }
+            }
+        }
 
 	}
 
@@ -84,14 +94,18 @@ public class NotifierEventListener implements EventListener {
 		Map<ActivityNotification, List<String>> interested = new HashMap<ActivityNotification, List<String>>();
 		for (ActivityNotification notification : notifs) {
 			List<String> notificationInterested = new ArrayList<String>();
+
 			if (activity.getVerb().equals(notification.getVerb())) {
-				for (RelationshipKind kind : notification
-						.getRelationshipKinds()) {
-					notificationInterested.addAll(NotifierServiceHelper
-							.getRelationshipService().getTargetsOfKind(
-									activity.getTarget(), kind));
+				for (RelationshipKind kind : notification.getRelationshipKinds()) {
+					notificationInterested.addAll(
+                            NotifierServiceHelper.getRelationshipService().getTargetsOfKind(activity.getTarget(), kind));
 				}
 			}
+
+            if (ActivityHelper.isUser(activity.getTarget()) && !notificationInterested.contains(activity.getTarget())) {
+                notificationInterested.add(activity.getTarget());
+            }
+
 			interested.put(notification, notificationInterested);
 		}
 		return interested;
