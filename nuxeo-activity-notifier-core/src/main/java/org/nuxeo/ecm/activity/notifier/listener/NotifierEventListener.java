@@ -91,23 +91,33 @@ public class NotifierEventListener implements EventListener {
 	private Map<ActivityNotification, List<String>> getInterstedUsers(
 			Activity activity, List<ActivityNotification> notifs)
 			throws Exception {
+
 		Map<ActivityNotification, List<String>> interested = new HashMap<ActivityNotification, List<String>>();
-		for (ActivityNotification notification : notifs) {
-			List<String> notificationInterested = new ArrayList<String>();
 
-			if (activity.getVerb().equals(notification.getVerb())) {
-				for (RelationshipKind kind : notification.getRelationshipKinds()) {
-					notificationInterested.addAll(
-                            NotifierServiceHelper.getRelationshipService().getTargetsOfKind(activity.getTarget(), kind));
-				}
-			}
+        for (ActivityNotification notification : notifs) {
+            List<String> notificationInterested = new ArrayList<String>();
 
-            if (ActivityHelper.isUser(activity.getTarget()) && !notificationInterested.contains(activity.getTarget())) {
-                notificationInterested.add(activity.getTarget());
+            if (activity.getContext() == null) {
+
+                if (activity.getVerb().equals(notification.getVerb())) {
+                    for (RelationshipKind kind : notification.getRelationshipKinds()) {
+                        if (ActivityHelper.isDocument(activity.getObject())) {
+                            notificationInterested.addAll(
+                                    NotifierServiceHelper.getRelationshipService().getTargetsOfKind(activity.getObject(), kind)
+                            );
+                        }
+                    }
+                }
+
+                // when interested user is the activity.target
+                if (ActivityHelper.isUser(activity.getTarget()) && !notificationInterested.contains(activity.getTarget())) {
+                    notificationInterested.add(activity.getTarget());
+                }
+
+                interested.put(notification, notificationInterested);
             }
-
-			interested.put(notification, notificationInterested);
 		}
+
 		return interested;
 	}
 
